@@ -1,7 +1,7 @@
-#Análisis de datos Vegetales NEON
+# Análisis de datos Vegetales NEON
 (Proyecto del curso Visualización y Análisis de datos medioambientales UC)
 
-##Variables de la base de datos
+## Variables de la base de datos
 | Variable       | Tipo     | Qué representa                                     | Ejemplo                    |
 | -------------- | -------- | -------------------------------------------------- | -------------------------- |
 | `species`      | Texto    | Nombre científico de la especie vegetal registrada | *Galactia elliottii* Nutt. |
@@ -12,5 +12,5 @@
 | `canopy_cover` | Numérica | Porcentaje de cobertura de esa especie             | `5`, `2`, `0.5`, etc.      |
 | `uid`          | Texto    | Identificador único de cada registro               | `a3c11564-d4a2...`         |
 
-##Objetivos
+## Objetivos
 Realizar análisis exploratorio de datos inicial para las identificaciones generales de las tendencias
