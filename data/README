@@ -1,0 +1,15 @@
+##Origen de los datos
+
+Los datos utilizados en este repositorio fueron obtenidos de NEON (National Ecological Observatory Network), una plataforma de acceso abierto que proporciona información ecológica para la investigación científica.
+
+Estos datos se utilizaron como material de referencia para el desarrollo de actividades académicas relacionadas con el análisis y la visualización de datos espaciales mediante RStudio.
+
+Fuente: National Ecological Observatory Network (NEON).
+
+Origen: Datos ecológicos obtenidos del portal oficial de NEON.
+
+Uso: Exclusivamente académico y educativo, con fines de aprendizaje, análisis y visualización de datos.
+
+Reconocimiento de autoría: Los datos originales fueron recopilados y publicados por NEON. Este repositorio no pretende atribuirse su autoría, sino utilizarlos como material de ejemplo para el desarrollo de ejercicios y visualizaciones.
+
+Licencia: Los datos de NEON se distribuyen bajo la licencia Creative Commons Attribution 4.0 International (CC BY 4.0), que permite su reutilización con el reconocimiento correspondiente de la fuente original.
