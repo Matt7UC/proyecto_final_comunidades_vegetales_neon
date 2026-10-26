@@ -23,6 +23,10 @@ académico y no implican autoría sobre los datos originales.
 
 ---
 
+**Nota:** Debido al tamaño del archivo original, GitHub no permite visualizar una vista previa de su contenido directamente desde el repositorio. Sin embargo, el archivo se encuentra disponible para su descarga y posterior análisis en RStudio en formato csv.
+
+---
+
 ### Fuente original
 
 National Ecological Observatory Network (NEON).
