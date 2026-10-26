@@ -6,6 +6,18 @@
 
 ---
 
+## Resumen del proyecto
+
+Este proyecto utiliza datos ecológicos obtenidos del **National Ecological Observatory Network (NEON)** para desarrollar un flujo de organización, análisis exploratorio y visualización de datos espaciales mediante RStudio. El trabajo se plantea como un ejercicio metodológico vinculado a mi futura investigación de tesis del **Magíster en Recursos Naturales de la Pontificia Universidad Católica de Chile**.
+
+Para este ejercicio académico se utiliza una base de datos de vegetación de NEON que contiene registros de especies vegetales, cobertura y variables espaciales. A partir de esta información, se busca explorar patrones de riqueza, composición y cobertura vegetal, junto con su distribución geográfica, mediante la elaboración de gráficos y visualizaciones espaciales.
+
+El propósito de este repositorio es **practicar la preparación, procesamiento, análisis exploratorio y visualización de datos ecológicos**, desarrollando herramientas que posteriormente puedan aplicarse al análisis de los datos obtenidos durante mi tesis de magíster.
+
+Los datos utilizados corresponden a registros reales de NEON y no a mediciones de mi investigación. Por lo tanto, este ejercicio no busca evaluar directamente las hipótesis de la tesis, sino fortalecer las capacidades metodológicas necesarias para su desarrollo.
+
+---
+
 ## 1. Introducción
 
 La distribución espacial de las especies vegetales constituye un componente fundamental para comprender la organización y variabilidad de las comunidades vegetales. La composición florística, riqueza de especies y cobertura vegetal representan atributos ecológicos que permiten caracterizar las comunidades y explorar sus diferencias a lo largo de gradientes geográficos y ambientales.
