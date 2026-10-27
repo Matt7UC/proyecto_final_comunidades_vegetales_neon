@@ -10,7 +10,6 @@ Los archivos contienen tablas descriptivas relacionadas con la composición flor
 
 | Archivo | Descripción |
 |---|---|
-| `resumen_general.csv` | Resumen de las dimensiones de la base de datos, incluyendo el número de registros y variables. |
 | `frecuencia_especies.csv` | Frecuencia de registros de cada especie vegetal, ordenada de mayor a menor. |
 | `riqueza_sitios.csv` | Riqueza observada de especies por unidad de muestreo y fecha de evaluación. |
 
