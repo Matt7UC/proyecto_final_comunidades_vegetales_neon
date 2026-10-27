@@ -19,8 +19,6 @@ Los archivos contienen tablas descriptivas relacionadas con la composición flor
 
 Los resultados corresponden a un **análisis exploratorio y descriptivo**, cuyo propósito es caracterizar los registros vegetales e identificar patrones generales en la información disponible.
 
-Las tablas fueron generadas mediante los procedimientos documentados en el script `02_analisis_exploratorio.R`, disponible en la carpeta `script/`.
-
 Las estimaciones de riqueza y frecuencia deben interpretarse considerando las unidades de muestreo y las posibles diferencias en el esfuerzo de muestreo.
 
 Los resultados tienen fines académicos y servirán como referencia metodológica para futuros análisis de comunidades vegetales en mi tesis de magíster.
