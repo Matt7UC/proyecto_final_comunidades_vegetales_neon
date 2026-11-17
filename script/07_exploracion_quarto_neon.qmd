@@ -1,0 +1,175 @@
+---
+title: "Exploración de la riqueza y distribución espacial de comunidades vegetales"
+subtitle: "Análisis exploratorio con datos NEON"
+author: "Rojas M. / Matt7UC"
+date: "2026-11-16"
+format:
+  html:
+    toc: true
+    theme: cosmo
+    code-fold: true
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+---
+
+## 1. Introducción
+
+La composición florística y riqueza de especies son atributos fundamentales para caracterizar la diversidad de las comunidades vegetales y comprender su variación espacial.
+
+Este proyecto utiliza registros de vegetación del National Ecological Observatory Network (NEON), provenientes de diferentes sitios de monitoreo de Estados Unidos.
+
+El objetivo de esta exploración es caracterizar la riqueza observada de especies vegetales y representar su variación entre sitios y su distribución geográfica.
+
+**Pregunta exploratoria:** ¿Cómo varía la riqueza de especies vegetales entre los sitios de monitoreo NEON?
+
+## 2. Importación y caracterización de datos
+
+Se utiliza una base de datos de cobertura vegetal de NEON, con información taxonómica, espacial y temporal.
+
+```{r}
+#| label: importar-datos
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+# Importar base de datos NEON
+
+datos_plant_cover <- read_csv(
+  "../data/plant_cover.csv",
+  show_col_types = FALSE
+)
+
+# Conocer dimensiones
+dim(datos_plant_cover)
+
+# Revisar variables
+glimpse(datos_plant_cover)
+```
+
+### 2.1. Variables originales
+
+La base de datos utilizada en este estudio contiene siete variables que permiten caracterizar los registros de vegetación, incluyendo información taxonómica, espacial, temporal y de cobertura vegetal.
+
+A continuación, se presentan las variables originales utilizadas para el análisis, junto con su tipo de dato, descripción y ejemplos.
+
+| Variable | Tipo | Qué representa | Ejemplo |
+|------------------|------------------|------------------|------------------|
+| `species` | Texto | Nombre científico de la especie vegetal registrada | *Galactia elliottii* Nutt. |
+| `lat` | Numérica | Latitud de la parcela | `28.058282` |
+| `lon` | Numérica | Longitud de la parcela | `-81.402874` |
+| `sitename` | Texto | Identificador del sitio, parcela y subparcela | `DSNY_DSNY_017_32.4.1` |
+| `date` | Fecha | Fecha en que se realizó el muestreo | `2019-11-04` |
+| `canopy_cover` | Numérica | Porcentaje de cobertura de esa especie | `5`, `2`, `0.5`, etc. |
+| `uid` | Texto | Identificador único de cada registro | `a3c11564-d4a2...` |
+
+: **Tabla 1.** Diccionario preliminar de las variables originales de la base de datos de vegetación NEON.
+
+**Fuente:** Elaboración propia a partir de datos del National Ecological Observatory Network (NEON).
+
+### 2.2. Caracterización general de la base de datos
+
+Se presenta una síntesis del número de registros, variables y nombres de especies identificados.
+
+```{r}
+#| label: tabla-resumen
+
+resumen_neon <- data.frame(
+  Registros = nrow(datos_plant_cover),
+  Variables = ncol(datos_plant_cover),
+  Especies = n_distinct(
+    datos_plant_cover$species,
+    na.rm = TRUE
+  )
+)
+
+knitr::kable(
+  resumen_neon,
+  caption = "Características generales de la base NEON"
+)
+```
+
+## 3. Análisis exploratorio de riqueza vegetal
+
+Se calculó la riqueza observada mediante el número de especies diferentes registradas por unidad de muestreo y fecha.
+
+```{r}
+#| label: calcular-riqueza
+
+riqueza_unidades <- datos_plant_cover %>%
+  filter(
+    !is.na(species),
+    trimws(species) != "",
+    !is.na(sitename),
+    trimws(sitename) != "",
+    !is.na(date)
+  ) %>%
+  mutate(
+    sitio_neon = sub("_.*$", "", sitename)
+  ) %>%
+  group_by(sitio_neon, sitename, date) %>%
+  summarise(
+    riqueza = n_distinct(species),
+    .groups = "drop"
+  )
+
+# Visualizar primeras unidades
+knitr::kable(
+  head(riqueza_unidades, 10),
+  caption = "Riqueza observada por unidad de muestreo"
+)
+```
+
+## 4. Variación de la riqueza entre sitios NEON
+
+La siguiente figura representa la distribución de la riqueza observada entre unidades de muestreo de diez sitios de monitoreo NEON.
+
+```{r}
+#| label: fig-riqueza
+#| fig-cap: "Variación de la riqueza observada entre sitios NEON."
+#| fig-width: 10
+#| fig-height: 6
+
+# Seleccionar sitios con mayor numero de evaluaciones
+sitios_top <- riqueza_unidades %>%
+  count(sitio_neon, name = "n_evaluaciones") %>%
+  slice_max(
+    n_evaluaciones,
+    n = 10,
+    with_ties = FALSE
+  ) %>%
+  pull(sitio_neon)
+
+# Generar grafico
+grafico_riqueza <- riqueza_unidades %>%
+  filter(sitio_neon %in% sitios_top) %>%
+  ggplot(aes(
+    x = sitio_neon,
+    y = riqueza
+  )) +
+  geom_boxplot(fill = "#79A98C") +
+  labs(
+    title = "Variacion de la riqueza vegetal entre sitios NEON",
+    x = "Sitio de monitoreo",
+    y = "Riqueza observada de especies"
+  ) +
+  theme_minimal(base_size = 12)
+
+print(grafico_riqueza)
+```
+
+## 5. Discusión preliminar
+
+La visualización permite explorar la variabilidad de la riqueza observada entre diferentes sitios de monitoreo NEON, identificando posibles diferencias en la distribución y dispersión de los valores registrados.
+
+Sin embargo, estas diferencias deben interpretarse considerando las características de las unidades de muestreo, la variación temporal y las posibles diferencias en el esfuerzo de muestreo.
+
+Por lo tanto, el análisis constituye una aproximación descriptiva que permite identificar patrones preliminares, sin establecer relaciones causales entre la ubicación geográfica y la diversidad vegetal.
+
+## 6. Proyección de la investigación
+
+Los procedimientos desarrollados mediante Quarto permitirán organizar de manera reproducible los análisis y visualizaciones de comunidades vegetales.
+
+Estas herramientas podrán adaptarse posteriormente a mi tesis de magíster, enfocada en la variación florística y estructural de comunidades vegetales ribereñas y terrestres adyacentes a lo largo de un gradiente altitudinal.
