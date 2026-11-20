@@ -21,13 +21,13 @@ list.files()
 datos_plant_cover <- read_csv("data/plant_cover.csv")
 
 # 5. Revisar primeras observaciones
-head(datos_neon)
+head(datos_plant_cover)
 
 # 6. Revisar dimensiones
-dim(datos_neon)
+dim(datos_plant_cover)
 
 # 7. Identificar variables
-names(datos_neon)
+names(datos_plant_cover)
 
 # 8. Revisar estructura
-glimpse(datos_neon)
+glimpse(datos_plant_cover)
